@@ -138,6 +138,8 @@ def main():
     player1 = Bat("left")
     player2 = Bat("right")
 
+
+
     # Initialise ball
     speed = 13
     rand = ((0.1 * (random.randint(5,8))))
@@ -154,10 +156,14 @@ def main():
     # Initialise clock
     clock = pygame.time.Clock()
 
+
+
     # Event loop
     while 1:
         # Make sure game doesn't run at more than 60 frames per second
         clock.tick(60)
+
+
 
         for event in pygame.event.get():
             if event.type == QUIT:
