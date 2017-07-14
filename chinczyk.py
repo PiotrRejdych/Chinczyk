@@ -66,6 +66,7 @@ def main():
     # Initialize assets
     global grupaPionkow
     global grupaGraczy
+    global grupaButtonowLosujacych
     global plansza
     plansza = Plansza.Plansza()
     backgroundsprite = pygame.sprite.Group(plansza)
@@ -123,12 +124,13 @@ def main():
         elif mode == GAMEPLAY_INITIALIZE:
             grupaPionkow = pygame.sprite.Group()
             grupaGraczy = pygame.sprite.Group()
-            Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, Pionek.Pionek.ZOLTY)
+            grupaButtonowLosujacych = pygame.sprite.Group()
+            Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, grupaButtonowLosujacych, Pionek.Pionek.ZOLTY)
             if graczy > 2:
-                Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, Pionek.Pionek.CZERWONY)
-            Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, Pionek.Pionek.NIEBIESKI)
+                Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, grupaButtonowLosujacych, Pionek.Pionek.CZERWONY)
+            Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, grupaButtonowLosujacych, Pionek.Pionek.NIEBIESKI)
             if graczy > 3:
-                Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, Pionek.Pionek.ZIELONY)
+                Gracz.Gracz(grupaPionkow, plansza, grupaGraczy, grupaButtonowLosujacych, Pionek.Pionek.ZIELONY)
 
             numer_gracza = 0
             gracz = grupaGraczy.sprites()[numer_gracza]
@@ -147,15 +149,26 @@ def main():
                     position = pygame.mouse.get_pos()
                     field = plansza.findSuitableBoardField(position)
                     zawartosc = czyPoleZajete(grupaPionkow, field)
+
                     if plansza.hasPlayerClickedHisHome(gracz.kolor, position):
                         if gracz.wyjmijPionekZDomu():
+                            if pionek_wybrany:
+                                pionek.odznacz()
+                                pionek = None
+                                pionek_wybrany = False
                             nastepnygracz = True
+                    elif gracz.kosc.rect.collidepoint(position):
+                        print(gracz.kosc.losuj())
                     elif pionek_wybrany:
-                        if field is not None:
-                            if not zawartosc:
-                                pionek.posadzWPoluPlanszy(field)
+                        if plansza.hasPlayerClickedHisBase(gracz.kolor, position):
+                            if pionek.posadzWBazie():
                                 pionek_wybrany = False
                                 nastepnygracz = True
+                        elif field is not None:
+                            if not zawartosc:
+                                if pionek.posadzWPoluPlanszy(field):
+                                    pionek_wybrany = False
+                                    nastepnygracz = True
                             elif pionek == zawartosc:
                                 pionek.odznacz()
                                 pionek_wybrany = False
@@ -166,7 +179,7 @@ def main():
                             pionek_wybrany = True
 
                     if nastepnygracz:
-                        numer_gracza +=1
+                        numer_gracza += 1
                         if numer_gracza == graczy:
                             numer_gracza = 0
                         gracz.odznacz()
@@ -181,6 +194,7 @@ def main():
             backgroundsprite.draw(screen)
             grupaPionkow.draw(screen)
             grupaGraczy.draw(screen)
+            grupaButtonowLosujacych.draw(screen)
             pygame.display.flip()
 
         else:

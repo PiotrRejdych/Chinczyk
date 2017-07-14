@@ -59,13 +59,19 @@ class Pionek(pygame.sprite.Sprite):
                                    point[1] - self.rect.top - self.rect.height / 2)
 
     def posadzWPoluPlanszy(self, field):
-        self.posadzWPunkcie(self.plansza.FIELD_COORDS[field])
-        self.pozycja = field
-        self.odznacz()
+        if self.status == Pionek.NA_PLANSZY:
+            self.posadzWPunkcie(self.plansza.FIELD_COORDS[field])
+            self.pozycja = field
+            self.odznacz()
+            return True
+        return False
         #self.rect = self.rect.move(self.plansza.FIELD_COORDS[field][0]-self.rect.left-self.rect.width/2, self.plansza.FIELD_COORDS[field][1]-self.rect.top-self.rect.height/2)
 
     def zbity(self):
-        self.posadzWDomu()
+        if self.status == Pionek.NA_PLANSZY:
+            self.posadzWDomu()
+            return True
+        return False
 
     def zaznacz(self):
         self.zaznaczony = True
@@ -95,4 +101,19 @@ class Pionek(pygame.sprite.Sprite):
                     self.status = Pionek.NA_PLANSZY
                     self.posadzWPoluPlanszy(self.gracz.start)
                     return True
+        return False
+
+    def posadzWBazie(self):
+        if self.status == Pionek.NA_PLANSZY:
+            i = 4
+            while i > 0:
+                i -= 1
+                if self.gracz.baza[i] == 0:
+                    self.gracz.baza[i] = 1
+                    self.status = Pionek.W_BAZIE
+                    self.pozycja = None
+                    self.odznacz()
+                    self.posadzWPunkcie(self.gracz.wspBazy[i])
+                    return True
+            return False
         return False

@@ -32,7 +32,7 @@ class Plansza(pygame.sprite.Sprite):
     GREEN_FINISH = 29
     GREEN_BASE = [[842, 496], [759, 496], [671, 496], [582, 496]]
 
-    FIELD_RADIUS = 34
+    FIELD_RADIUS = 18
 
     def __init__(self):
         pygame.sprite.Sprite.__init__(self)
@@ -101,6 +101,30 @@ class Plansza(pygame.sprite.Sprite):
         else:
             raise AttributeError
 
+    def hasPlayerClickedHisBase(self, color, point):
+        if color == Pionek.Pionek.ZOLTY:
+            for pole in self.YELLOW_BASE:
+                if self.isClickpointNearby(pole, point):
+                    return True
+            return False
+        elif color == Pionek.Pionek.CZERWONY:
+            for pole in self.RED_BASE:
+                if self.isClickpointNearby(pole, point):
+                    return True
+            return False
+        elif color == Pionek.Pionek.NIEBIESKI:
+            for pole in self.BLUE_BASE:
+                if self.isClickpointNearby(pole, point):
+                    return True
+            return False
+        elif color == Pionek.Pionek.ZIELONY:
+            for pole in self.GREEN_BASE:
+                if self.isClickpointNearby(pole, point):
+                    return True
+            return False
+        else:
+            raise AttributeError
+
     def findSuitableField(self, point):
         # return field that the player meant when he clicked
         for i in range(0,len(Plansza.FIELD_COORDS)):
@@ -144,3 +168,9 @@ class Plansza(pygame.sprite.Sprite):
     def isClickpointNearby(self, field, point):
         return Plansza.FIELD_RADIUS > math.sqrt(math.pow(field[0]-point[0],2)+math.pow(field[1]-point[1],2))
 
+    def czyPoleZajete(self, pionki, field):
+        for pawn in pionki:
+            if pawn.status == Pionek.Pionek.NA_PLANSZY:
+                if pawn.pozycja == field:
+                    return pawn
+        return False
