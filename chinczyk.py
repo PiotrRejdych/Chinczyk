@@ -59,6 +59,11 @@ def main():
     global pionek_wybrany
     global numer_gracza
     global nastepnygracz
+    global wynik_na_kosci
+    global drugi_rzut_po_6
+    global drugi_rzut_po_6_wykorzystany
+    global trzy_rzuty
+    global wygral
     global gracz
     global pionek
     global graczy
@@ -89,7 +94,8 @@ def main():
     button_exit_rect = button_exit.get_rect()
     button_exit_rect = button_exit_rect.move(SIZE[0] / 2 - button_exit_rect.width / 2, 410)
 
-
+    # initialize win screens
+    win_screens = [load.load_png('assets/wygrana_zolty.png'), load.load_png('assets/wygrana_czerwony.png'), load.load_png('assets/wygrana_niebieski.png'), load.load_png('assets/wygrana_zielony.png') ]
 
     while 1:
         clock.tick(60)
@@ -136,6 +142,11 @@ def main():
             gracz = grupaGraczy.sprites()[numer_gracza]
             pionek_wybrany = False
             nastepnygracz = False
+            wynik_na_kosci = 0
+            drugi_rzut_po_6 = False
+            drugi_rzut_po_6_wykorzystany = False
+            trzy_rzuty = 0
+            wygral = None
             gracz.zaznacz()
 
             mode = GAMEPLAY
@@ -147,45 +158,95 @@ def main():
                     sys.exit()
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     position = pygame.mouse.get_pos()
-                    field = plansza.findSuitableBoardField(position)
-                    zawartosc = czyPoleZajete(grupaPionkow, field)
-
-                    if plansza.hasPlayerClickedHisHome(gracz.kolor, position):
+                    if wygral is not None:
+                        mode = MENU
+                    # obsluga trzech rzutow dla gracza ktory nie ma pionkow na planszy
+                    elif wynik_na_kosci != 0 and wynik_na_kosci != 6 and not gracz.czyGraczMaPionkiNaPlanszy() and not drugi_rzut_po_6:
+                        if trzy_rzuty == 2:
+                            nastepnygracz = True
+                        elif gracz.kosc.rect.collidepoint(position):
+                            wynik_na_kosci = gracz.kosc.losuj()
+                            trzy_rzuty += 1
+                    # obsluga rzutu koscia, byc moze drugiego z kolei po wyrzuceniu 6
+                    elif wynik_na_kosci == 0 and gracz.kosc.rect.collidepoint(position):
+                        if drugi_rzut_po_6:
+                            wynik_na_kosci = gracz.kosc.losuj()
+                            drugi_rzut_po_6 = False
+                            drugi_rzut_po_6_wykorzystany = True
+                        else:
+                            wynik_na_kosci = gracz.kosc.losuj()
+                    # wyprowadzenie pionka z domu
+                    elif wynik_na_kosci == 6 and plansza.hasPlayerClickedHisHome(gracz.kolor, position):
                         if gracz.wyjmijPionekZDomu():
                             if pionek_wybrany:
                                 pionek.odznacz()
                                 pionek = None
                                 pionek_wybrany = False
                             nastepnygracz = True
-                    elif gracz.kosc.rect.collidepoint(position):
-                        print(gracz.kosc.losuj())
-                    elif pionek_wybrany:
-                        if plansza.hasPlayerClickedHisBase(gracz.kolor, position):
+                    elif wynik_na_kosci != 0:
+                        # wprowadzenie pionka do bazy
+                        if pionek_wybrany and plansza.hasPlayerClickedHisBase(gracz.kolor, position) and pionek.wyznaczCel(wynik_na_kosci) == 40:
                             if pionek.posadzWBazie():
                                 pionek_wybrany = False
-                                nastepnygracz = True
-                        elif field is not None:
-                            if not zawartosc:
-                                if pionek.posadzWPoluPlanszy(field):
-                                    pionek_wybrany = False
-                                    nastepnygracz = True
-                            elif pionek == zawartosc:
                                 pionek.odznacz()
-                                pionek_wybrany = False
-                    elif zawartosc is not False:
-                        if zawartosc.gracz == gracz:
-                            pionek = zawartosc
-                            pionek.zaznacz()
-                            pionek_wybrany = True
+                                pionek = None
+                                if gracz.czyGraczZapelnilBaze():
+                                    wygral = gracz
+                                else:
+                                    nastepnygracz = True
+                        else:
+                        # inne poruszanie po planszy, zbijanie pionkow, zaznaczanie swoich pionkow
+                            field = plansza.findSuitableBoardField(position)
+                            if field is not None:
+                                zawartosc = plansza.czyPoleZajete(grupaPionkow, field)
+                                if zawartosc is not False:
+                                    if pionek_wybrany:
+                                        if pionek == zawartosc:
+                                            pionek.odznacz()
+                                            pionek_wybrany = False
+                                            pionek = None
+                                        elif pionek.gracz == zawartosc.gracz:
+                                            pionek.odznacz()
+                                            pionek = zawartosc
+                                            pionek.zaznacz()
+                                        elif pionek.wyznaczCel(wynik_na_kosci) == field:
+                                            if zawartosc.zbity():
+                                                if pionek.posadzWPoluPlanszy(field):
+                                                    pionek.odznacz()
+                                                    pionek_wybrany = False
+                                                    pionek = None
+                                                    nastepnygracz = True
+                                    elif zawartosc.gracz == gracz:
+                                        pionek = zawartosc
+                                        pionek_wybrany = True
+                                        pionek.zaznacz()
+                                elif pionek_wybrany:
+                                    if pionek.wyznaczCel(wynik_na_kosci) == field:
+                                        if pionek.posadzWPoluPlanszy(field):
+                                            pionek.odznacz()
+                                            pionek_wybrany = False
+                                            pionek = None
+                                            nastepnygracz = True
+
 
                     if nastepnygracz:
-                        numer_gracza += 1
-                        if numer_gracza == graczy:
-                            numer_gracza = 0
-                        gracz.odznacz()
-                        gracz = grupaGraczy.sprites()[numer_gracza]
-                        gracz.zaznacz()
-                        nastepnygracz = False
+                        if wynik_na_kosci == 6 and not drugi_rzut_po_6_wykorzystany and trzy_rzuty == 0:
+                            drugi_rzut_po_6 = True
+                            nastepnygracz = False
+                            wynik_na_kosci = 0
+                            gracz.kosc.ustawzero()
+                        else:
+                            drugi_rzut_po_6 = False
+                            drugi_rzut_po_6_wykorzystany = False
+                            wynik_na_kosci = 0
+                            trzy_rzuty = 0
+                            numer_gracza += 1
+                            if numer_gracza == graczy:
+                                numer_gracza = 0
+                            gracz.odznacz()
+                            gracz = grupaGraczy.sprites()[numer_gracza]
+                            gracz.zaznacz()
+                            nastepnygracz = False
                 elif event.type == KEYDOWN:
                     if event.key == K_ESCAPE:
                         mode = MENU
@@ -195,6 +256,10 @@ def main():
             grupaPionkow.draw(screen)
             grupaGraczy.draw(screen)
             grupaButtonowLosujacych.draw(screen)
+            if pionek_wybrany:
+                pionek.narysujDrogeA(wynik_na_kosci, screen)
+            if wygral is not None:
+                screen.blit(win_screens[wygral.kolor][0], win_screens[wygral.kolor][1])
             pygame.display.flip()
 
         else:

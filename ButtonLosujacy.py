@@ -47,3 +47,6 @@ class ButtonLosujacy(pygame.sprite.Sprite):
         wynik = random.randint(1,6)
         self.image = self.images[wynik][0]
         return wynik
+
+    def ustawzero(self):
+        self.zaznacz()

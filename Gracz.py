@@ -74,13 +74,29 @@ class Gracz(pygame.sprite.Sprite):
         self.grupaGraczy.add(self)
 
     def wyjmijPionekZDomu(self):
-        if self.plansza.czyPoleZajete(self.pionki, self.start) is False:
-            for pawn in self.moje_pionki:
-                if pawn.status == Pionek.Pionek.W_DOMU:
-                    if pawn.wyjmijZDomu():
-                        return pawn
-            return False
+        zawartosc = self.plansza.czyPoleZajete(self.pionki, self.start)
+        if zawartosc is not False:
+            if zawartosc.gracz != self:
+                zawartosc.zbity()
+            else:
+                return False
+        for pawn in self.moje_pionki:
+            if pawn.status == Pionek.Pionek.W_DOMU:
+                if pawn.wyjmijZDomu():
+                    return True
         return False
+
+    def czyGraczMaPionkiNaPlanszy(self):
+        for pion in self.moje_pionki:
+            if pion.status == Pionek.Pionek.NA_PLANSZY:
+                return True
+        return False
+
+    def czyGraczZapelnilBaze(self):
+        for pion in self.moje_pionki:
+            if pion.status != Pionek.Pionek.W_BAZIE:
+                return False
+        return True
 
     def zaznacz(self):
         self.image = self.imageexcited

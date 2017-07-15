@@ -67,6 +67,58 @@ class Pionek(pygame.sprite.Sprite):
         return False
         #self.rect = self.rect.move(self.plansza.FIELD_COORDS[field][0]-self.rect.left-self.rect.width/2, self.plansza.FIELD_COORDS[field][1]-self.rect.top-self.rect.height/2)
 
+    def wyznaczCel(self, fieldcount):
+        if self.status == self.NA_PLANSZY:
+            if self.pozycja + fieldcount >= 40:
+                if self.gracz.finisz == 39:
+                    return 40
+                else:
+                    return self.pozycja + fieldcount - 40
+            else:
+                if self.pozycja > self.gracz.finisz:
+                    return self.pozycja + fieldcount
+                elif self.pozycja + fieldcount > self.gracz.finisz:
+                    return 40 # 40 oznacza wejście do bazy
+                else:
+                    return self.pozycja + fieldcount
+        else:
+            raise AttributeError
+
+    def narysujDrogeA(self, fieldcount, ekran):
+        self.narysujDroge(self.wyznaczCel(fieldcount), ekran)
+
+    def narysujDroge(self, field, ekran):
+        if self.status == self.NA_PLANSZY:
+            if field == 40: #wrzut do bazy
+                punkty = [self.plansza.FIELD_COORDS[self.pozycja]]
+                if self.pozycja > self.gracz.finisz:
+                    for i in range(self.pozycja+1, len(self.plansza.FIELD_COORDS)):
+                        punkty.append(self.plansza.FIELD_COORDS[i])
+                    for i in range(0, self.gracz.finisz+1):
+                        punkty.append(self.plansza.FIELD_COORDS[i])
+                else:
+                    for i in range(self.pozycja, self.gracz.finisz):
+                        punkty.append(self.plansza.FIELD_COORDS[i+1])
+                punkty.append(self.gracz.wspBazy[0])
+
+                pygame.draw.lines(ekran, self.kolor, False, punkty, 3)
+            elif 0 <= field < 40:
+                punkty = [self.plansza.FIELD_COORDS[self.pozycja]]
+                if self.pozycja > field:
+                    for i in range(self.pozycja + 1, len(self.plansza.FIELD_COORDS)):
+                        punkty.append(self.plansza.FIELD_COORDS[i])
+                    for i in range(0, field + 1):
+                        punkty.append(self.plansza.FIELD_COORDS[i])
+                else:
+                    for i in range(self.pozycja, field):
+                        punkty.append(self.plansza.FIELD_COORDS[i + 1])
+
+                pygame.draw.lines(ekran, self.kolor, False, punkty, 3)
+            else:
+                raise AttributeError
+        else:
+            raise AttributeError
+
     def zbity(self):
         if self.status == Pionek.NA_PLANSZY:
             self.posadzWDomu()
