@@ -2,49 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2ad3c82b-3d76-411e-bd50-0e192a6bb703" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice-1-free-download-clip-art-on-clipart-library.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_1.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_1.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_2.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_2.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_3.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_3.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_4.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_4.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_5.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_5.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_6.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_6.jpg" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_x.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/Dice_x.dib" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/ball.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/ball.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/button_exit.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/button_new_game.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/button_rzut.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/button_rzut.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/chinczyk_01.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/chinczyk_02.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/gracz_czerwony_wzbudzony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/gracz_niebieski_wzbudzony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/gracz_zielony_wzbudzony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/gracz_zolty_wzbudzony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek_czerwony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek_niebieski.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek_zielony.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/pionek_zolty.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/plansza.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/plansza_czerwone.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/plansza_niebieskie.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/plansza_zielone.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/assets/arch/plansza_zolte.bmp" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/trial1.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ButtonLosujacy.py" afterPath="$PROJECT_DIR$/ButtonLosujacy.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gracz.py" afterPath="$PROJECT_DIR$/Gracz.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Pionek.py" afterPath="$PROJECT_DIR$/Pionek.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chinczyk.py" afterPath="$PROJECT_DIR$/chinczyk.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/ball.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/data/bat.png" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -184,52 +143,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cwiczenia_zaliczeniowe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Python" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="cwiczenia_zaliczeniowe" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Chinczyk" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -485,7 +398,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2489019" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
